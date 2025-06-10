@@ -22,7 +22,7 @@
         <div class="text-wrapper-2">Kulit Kering</div>
         <div class="overlap-2">
           <div class="text"></div>
-          <div class="text-wrapper-3">Kulit Berminyak</div>
+          <div class="text-wrapper-3">Kulit Berminyakk</div>
         </div>
         <div class="text-wrapper-4">Kulit Kombinasi</div>
         <div class="text-wrapper-5">Kulit Sensitive</div>
