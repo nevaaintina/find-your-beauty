@@ -3,8 +3,9 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="globals.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../assets/css/global.css" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+
   </head>
   <body>
     <div class="wireframe-homepage">
@@ -22,7 +23,7 @@
         <div class="text-wrapper-2">Kulit Kering</div>
         <div class="overlap-2">
           <div class="text"></div>
-          <div class="text-wrapper-3">Kulit Berminyakk</div>
+          <div class="text-wrapper-3">Kulit Berminyak</div>
         </div>
         <div class="text-wrapper-4">Kulit Kombinasi</div>
         <div class="text-wrapper-5">Kulit Sensitive</div>
