@@ -1,90 +1,75 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../assets/css/global.css" />
-    <link rel="stylesheet" href="../../assets/css/style.css" />
-  </head>
-  <body>
-    <div class="wireframe-artikel">
-      <div class="div">
-        <div class="overlap-group">
-          <div class="rectangle"></div>
-          <div class="rectangle-2"></div>
-          <img class="download" src="img/download-3.png" />
-        </div>
-        <div class="overlap">
-          <div class="text-wrapper">popular articles</div>
-          <img class="line" src="img/line-20.svg" />
-          <img class="img" src="img/line-24.svg" />
-        </div>
-        <p class="chelsea-islan-spill">
-          <span class="span">Chelsea Islan Spill Perawatan Kulit Slow Aging Bersama Bio Beauty Lab<br /><br /></span>
-          <span class="text-wrapper-2">by Shavira Annisa Putri</span>
-        </p>
-        <p class="pentingnya-skincare">
-          <span class="span">Pentingnya Skincare Awareness di Usia Remaja<br /><br /></span>
-          <span class="text-wrapper-2">by dr. Gabriella Florencia</span>
-        </p>
-        <p class="super-yummy-from">
-          <span class="span"
-            >Super Yummy! From This Island dan Grainsly Rilis Produk yang Terinspirasi dari Cinnamon Toast!<br /><br
-          /></span>
-          <span class="text-wrapper-3">by </span>
-          <a href="https://editorial.femaledaily.com/blog/author/salmanrh" target="_blank" rel="noopener noreferrer"
-            ><span class="text-wrapper-4">salmanrh</span></a
-          >
-        </p>
-        <div class="overlap-2">
-          <div class="text-wrapper-5">Latest Article</div>
-          <img class="line-2" src="img/line-22.svg" />
-          <img class="line-3" src="img/line-25.svg" />
-        </div>
-        <div class="download-wrapper"><img class="download" src="img/download-2.png" /></div>
-        <div class="overlap-3">
-          <img class="vector" src="img/image.svg" />
-          <div class="rectangle-3"></div>
-          <img class="rectangle-4" src="img/rectangle-124.svg" />
-          <div class="rectangle-5"></div>
-          <p class="p">R e v i e w s</p>
-          <p class="text-wrapper-6">P r o d u c t</p>
-          <p class="text-wrapper-7">R e c o m m e n d a t i on</p>
-          <p class="text-wrapper-8">F o r u m</p>
-          <p class="text-wrapper-9">A r t i c l e</p>
-          <p class="text-wrapper-10">W i s h l i s t</p>
-          <p class="text-wrapper-11">P r o f i l</p>
-          <img class="find-your-beauty" src="img/find-your-beauty-3.png" />
-          <div class="text-wrapper-12">Register / Login</div>
-          <div class="text-wrapper-13">Search</div>
-          <img class="header" src="img/header.png" />
-          <img class="group" src="img/group.png" />
-          <img class="vector-2" src="img/vector.svg" />
-          <img class="lsicon-down-filled" src="img/lsicon-down-filled.svg" />
-        </div>
-        <div class="overlap-4">
-          <div class="rectangle-6"></div>
-          <p class="find-your-glow-app">Find Your Glow App</p>
-        </div>
-        <div class="upload-wrapper"><img class="img-2" src="img/upload-b10fc0415411b8d3f159accbd6b056af.png" /></div>
-        <div class="from-this-island-wrapper">
-          <img class="img-2" src="img/from-this-island-cinnamon-toast-7.png" />
-        </div>
-        <div class="overlap-5">
-          <div class="rectangle-7"></div>
-          <div class="rectangle-8"></div>
-          <img class="line-4" src="img/line-45.svg" />
-          <img class="rectangle-9" src="img/rectangle-141.png" />
-          <p class="by-NAT-NEVA-AWALIA">By&nbsp;&nbsp; NAT [ NEVA AWALIA TIARA ].</p>
-          <p class="text-wrapper-14">© 2025 Your Find Glow. All Rights Reserved</p>
-        </div>
-        <p class="kulit-sehat-bukan">
-          <span class="span"
-            >Kulit Sehat Bukan Hasil instan: Memahami Perjalanan Skincare yang Realistis<br /><br
-          /></span>
-          <span class="text-wrapper-2">by: Naradiva</span>
-        </p>
-      </div>
-    </div>
-  </body>
-</html>
+  <?php include_once('../../components/header.php'); ?>
+  <!-- Main content -->
+  <main class="flex-grow px-6 py-6 max-w-6xl mx-auto">
+   <!-- popular articles heading -->
+   <div class="flex items-center justify-center space-x-3 mb-6">
+    <hr class="border-t border-[#3a3b1a] w-24"/>
+    <h2 class="italic-playfair text-[#3a3b1a] text-lg select-text">
+     popular articles
+    </h2>
+    <hr class="border-t border-[#3a3b1a] w-24"/>
+   </div>
+   <!-- popular articles cards -->
+   <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+    <!-- Article 1 -->
+    <article class="bg-[#f3f0d7] rounded-xl p-4 max-w-md mx-auto sm:mx-0" style="min-width: 320px;">
+     <img alt="Chelsea Islan speaking at a beauty event with a large poster of her smiling face in the background and people attending the event" class="rounded-xl mb-3 w-full object-cover" height="180" src="https://storage.googleapis.com/a1aa/image/d5df4333-f06d-4019-8754-3cd2451b43bf.jpg" width="320"/>
+     <h3 class="text-sm font-semibold text-[#000000cc] mb-1 leading-snug">
+      Chelsea Islan Spill Perawatan Kulit Slow Aging Bersama Bio Beauty Lab
+     </h3>
+     <p class="text-[9px] text-[#3a3b1a] font-light">
+      by
+      <span class="underline cursor-pointer">
+       Shavira Annisa Putri
+      </span>
+     </p>
+    </article>
+    <!-- Article 2 -->
+    <article class="bg-[#f3f0d7] rounded-xl p-4 max-w-md mx-auto sm:mx-0" style="min-width: 320px;">
+     <img alt="Beauty product tubes with cinnamon toast and honey in the background, showing the product texture" class="rounded-xl mb-3 w-full object-cover" height="180" src="https://storage.googleapis.com/a1aa/image/f97b0d46-05c4-434c-18e4-3ee9377066b7.jpg" width="320"/>
+     <h3 class="text-sm font-semibold text-[#000000cc] mb-1 leading-snug">
+      Super Yummy! From This Island dan Grainsly Rilis Produk yang Terinspirasi dari Cinnamon Toast!
+     </h3>
+     <p class="text-[9px] text-[#3a3b1a] font-light">
+      by
+      <span class="underline cursor-pointer">
+       salmanrh
+      </span>
+     </p>
+    </article>
+   </div>
+   <!-- latest article heading -->
+   <div class="flex items-center justify-center space-x-3 mb-6">
+    <hr class="border-t border-[#3a3b1a] w-24"/>
+    <h2 class="italic-playfair text-[#3a3b1a] text-lg select-text">
+     Latest Article
+    </h2>
+    <hr class="border-t border-[#3a3b1a] w-24"/>
+   </div>
+   <!-- latest articles cards -->
+   <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <!-- Article 3 -->
+    <article class="bg-[#f3f0d7] rounded-xl p-4 max-w-md mx-auto sm:mx-0" style="min-width: 320px;">
+     <img alt="Teenage girl smiling and applying skincare cream on her face in a bright setting" class="rounded-xl mb-3 w-full object-cover" height="180" src="https://storage.googleapis.com/a1aa/image/62365621-7f25-49ac-0957-191c83f0b486.jpg" width="320"/>
+     <h3 class="text-sm font-semibold text-[#000000cc] mb-1 leading-snug">
+      Pentingnya Skincare Awareness di Usia Remaja
+     </h3>
+     <p class="text-[9px] text-[#3a3b1a] font-light">
+      by dr. Gabriella Florencia
+     </p>
+    </article>
+    <!-- Article 4 -->
+    <article class="bg-[#f3f0d7] rounded-xl p-4 max-w-md mx-auto sm:mx-0" style="min-width: 320px;">
+     <img alt="Woman smiling holding a skincare jar near her face with a towel wrapped on her head" class="rounded-xl mb-3 w-full object-cover" height="180" src="https://storage.googleapis.com/a1aa/image/9a725e17-acac-4b70-39fb-100fe82f4250.jpg" width="320"/>
+     <h3 class="text-sm font-semibold text-[#000000cc] mb-1 leading-snug">
+      Kulit Sehat Bukan Hasil instan: Memahami Perjalanan Skincare yang Realistis
+     </h3>
+     <p class="text-[9px] text-[#3a3b1a] font-light">
+      by: Naradiva
+     </p>
+    </article>
+   </div>
+  </main>
+  
+
+<?php include_once('../../components/footer.php'); ?>
