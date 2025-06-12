@@ -1,4 +1,15 @@
-  <?php include_once('../../components/header.php'); ?>
+  <?php 
+  include_once('../../components/header.php'); 
+  include_once('../../function/function.php');
+  
+$query = "SELECT review.*, user.username, user.foto, produk.nama_produk, produk.foto_produk FROM review
+          JOIN user ON user.id_user = review.id_user
+          JOIN produk ON produk.id_produk = review.id_produk
+
+ ";
+$result = query($query);
+
+  ?>
 
    <!-- Thin horizontal lines below nav -->
    <div class="max-w-7xl mx-auto px-4 mt-1">
@@ -23,21 +34,23 @@
      Newest
     </button>
     <!-- Review cards -->
+    <?php foreach ($result as $row) : ?>
     <article class="border border-gray-200 rounded-md p-4 mb-6 flex gap-4 max-w-[600px]">
-     <img alt="Bottle of Cetaphil Gentle Skin Cleanser with blue cap on white background" class="w-[100px] h-[100px] object-contain rounded" height="100" src="https://storage.googleapis.com/a1aa/image/cb05ae8a-0dfa-4b4a-d442-e2050032085a.jpg" width="100"/>
+     <img alt="Bottle of Cetaphil Gentle Skin Cleanser with blue cap on white background" class="w-[100px] h-[100px] object-contain rounded" height="100" src="../admin/foto_produk/<?= $row['foto_produk'] ?>" width="100"/>
      <div class="flex-1 text-[11px] font-sans text-gray-900">
       <div class="flex items-center gap-2 mb-1">
-       <img alt="Profile picture of user @ameliaaandanii, female with light hair" class="w-7 h-7 rounded-full object-cover" height="30" src="https://storage.googleapis.com/a1aa/image/b8a7c20a-d1ed-47ac-9976-592045268f5f.jpg" width="30"/>
+       <img alt="Profile picture of user @ameliaaandanii, female with light hair" class="w-7 h-7 rounded-full object-cover" src="../admin/foto/<?= $row['foto'] ?>" height="30" width="30"/>
        <span class="font-semibold text-[12px]">
-        @ameliaaandanii
+        <?= $row['username'] ?>
        </span>
       </div>
       <p class="text-[10px] text-gray-600 mb-1">
        normal, sensitive
       </p>
-      <p class="text-[12px] mb-1 text-red-600">
-       ❤️❤️❤️❤️❤️
-      </p>
+    <p class="text-[12px] mb-1 text-red-600">
+    <?= str_repeat('❤️', $row['rating']) ?>
+    </p>
+
       <p class="flex items-center gap-1 text-[11px] text-gray-700 mb-1">
        <i class="fas fa-check-circle text-[#4f5730]">
        </i>
@@ -46,65 +59,11 @@
        </em>
       </p>
       <p class="text-[11px]">
-       Produknya bagus banget, cocok untuk kulit kering
+        <?= $row['komentar'] ?>
       </p>
      </div>
     </article>
-    <article class="border border-gray-200 rounded-md p-4 mb-6 flex gap-4 max-w-[600px]">
-     <img alt="Tall white serum bottle with silver cap on white background" class="w-[100px] h-[100px] object-contain rounded" height="100" src="https://storage.googleapis.com/a1aa/image/00f4dd38-e92d-4245-2517-c72e5d85a4d6.jpg" width="100"/>
-     <div class="flex-1 text-[11px] font-sans text-gray-900">
-      <div class="flex items-center gap-2 mb-1">
-       <img alt="Profile picture of user @tasyafarasayaa, female with light brown hair" class="w-7 h-7 rounded-full object-cover" height="30" src="https://storage.googleapis.com/a1aa/image/4bb7d5ae-2e6a-4e36-a897-9a7824dec795.jpg" width="30"/>
-       <span class="font-semibold text-[12px]">
-        @tasyafarasayaa
-       </span>
-      </div>
-      <p class="text-[10px] text-gray-600 mb-1">
-       normal, berminyak
-      </p>
-      <p class="text-[12px] mb-1 text-red-600">
-       ❤️❤️❤️❤️❤️
-      </p>
-      <p class="flex items-center gap-1 text-[11px] text-gray-700 mb-1">
-       <i class="fas fa-check-circle text-[#4f5730]">
-       </i>
-       <em>
-        Recommendation
-       </em>
-      </p>
-      <p class="text-[11px]">
-       Serumnya bagus banget apalagi buat kulit kering dan untuk
-            mencerahkan kulit
-      </p>
-     </div>
-    </article>
-    <article class="border border-gray-200 rounded-md p-4 mb-6 flex gap-4 max-w-[600px]">
-     <img alt="White pump bottle with black pump on white background" class="w-[100px] h-[100px] object-contain rounded" height="100" src="https://storage.googleapis.com/a1aa/image/a3de792e-8162-4fd8-bc9a-363dd6944706.jpg" width="100"/>
-     <div class="flex-1 text-[11px] font-sans text-gray-900">
-      <div class="flex items-center gap-2 mb-1">
-       <img alt="Profile picture of user @prillylatuconsina_, female with dark hair" class="w-7 h-7 rounded-full object-cover" height="30" src="https://storage.googleapis.com/a1aa/image/8632db50-5481-4afb-21de-101b91e8a968.jpg" width="30"/>
-       <span class="font-semibold text-[12px]">
-        @prillylatuconsina_
-       </span>
-      </div>
-      <p class="text-[10px] text-gray-600 mb-1">
-       normal, berjerawat
-      </p>
-      <p class="text-[12px] mb-1 text-red-600">
-       ❤️❤️❤️❤️
-      </p>
-      <p class="flex items-center gap-1 text-[11px] text-gray-700 mb-1">
-       <i class="fas fa-check-circle text-[#4f5730]">
-       </i>
-       <em>
-        Recommendation
-       </em>
-      </p>
-      <p class="text-[11px]">
-       Cocok buat melembapkan kulit, recommended bangett
-      </p>
-     </div>
-    </article>
+      <?php endforeach; ?>
    </section>
    <!-- Right content: Top Members -->
    <aside class="w-full max-w-xs bg-white border border-gray-200 rounded-md p-4 text-[11px] font-sans text-gray-900">

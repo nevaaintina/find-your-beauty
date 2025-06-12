@@ -378,23 +378,33 @@
 </head>
 <body>
   
-
- 
-
   <main>
     <section class="sign-in" aria-labelledby="signin-heading">
       <h2 id="signin-heading">Sign In</h2>
-      <form>
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" placeholder="your.email@example.com" required autocomplete="username" />
+        <?php if(!empty($_GET['gagal'])){?>
+        <?php if($_GET['gagal']=="userKosong"){?>
+        <span class="text-danger">
+       <p style="color: red;"> Maaf Username tidak boleh kosong</p>
+        </span>
+        <?php } else if($_GET['gagal']=="passKosong"){?>
+       <p style="color: red;"> Maaf Password tidak boleh kosong</p>
+        <?php } else {?>
+        <p style="color: red;"> Maaf Username dan Password Anda Salah</p>
+        <?php }?>
+      <?php }?>
+      <form method="POST" action="konfirmasilogin.php">
+        <label for="email">Username</label>
+        <input id="email" name="username" type="text" placeholder="your username" required autocomplete="username" />
         <label for="password">Password</label>
         <input id="password" name="password" type="password" placeholder="••••••••" required autocomplete="current-password" />
-        <button type="submit">Sign In</button>
+        <button type="submit" name="login">Sign In</button>
       </form>
     </section>
     <section class="new-account" aria-labelledby="newaccount-heading">
       <h2 id="newaccount-heading">New Account</h2>
+      <a href="/find-your-beauty/pages/register/create-account.php">
       <button type="button" aria-label="Create new account">Create Account</button>
+      </a>
     </section>
   </main>
 
