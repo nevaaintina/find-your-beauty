@@ -1,11 +1,7 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "findyourbeauty";
-
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+$koneksi = mysqli_connect("localhost","root","","findyourbeauty");
+// cek koneksi
+if (!$koneksi){
+  die("Error koneksi: " . mysqli_connect_errno());
 }
 ?>

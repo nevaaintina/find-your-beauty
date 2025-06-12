@@ -30,9 +30,11 @@
     <div class="flex-1">
     </div>
     <div class="flex items-center space-x-4 text-xs font-semibold">
+      <a href="/find-your-beauty/pages/register/login.php">
      <span>
       Register / Login
      </span>
+     </a>
      <i class="fas fa-user-circle text-lg">
      </i>
     </div>
