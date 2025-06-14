@@ -39,7 +39,9 @@ $result = query($query);
      <img alt="Bottle of Cetaphil Gentle Skin Cleanser with blue cap on white background" class="w-[100px] h-[100px] object-contain rounded" height="100" src="../admin/foto_produk/<?= $row['foto_produk'] ?>" width="100"/>
      <div class="flex-1 text-[11px] font-sans text-gray-900">
       <div class="flex items-center gap-2 mb-1">
-       <img alt="Profile picture of user @ameliaaandanii, female with light hair" class="w-7 h-7 rounded-full object-cover" src="../admin/foto/<?= $row['foto'] ?>" height="30" width="30"/>
+       <img alt="Profile picture of user @ameliaaandanii, female with light hair" class="w-7 h-7 rounded-full object-cover" 
+      src="<?= !empty($row['foto']) ? '../admin/foto/' . $row['foto'] : '../admin/foto/default-user.png' ?>"
+       height="30" width="30"/>
        <span class="font-semibold text-[12px]">
         <?= $row['username'] ?>
        </span>

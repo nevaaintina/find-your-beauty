@@ -68,10 +68,16 @@ $tanggal_terbit = "";
               <input type="text" class="form-control" name="judul_artikel" id="judul_artikel" value="<?php echo $judul_artikel; ?>">
             </div>
           </div>   
-          <div class="form-group row">
-            <label for="konten" class="col-sm-3 col-form-label">Konten</label>
+        <div class="form-group row">
+         <label for="konten" class="col-sm-3 col-form-label">Konten</label>
+        <div class="col-sm-7">
+         <textarea class="form-control" name="konten" id="konten" rows="10"><?php echo $konten; ?></textarea>
+          </div>
+        </div>
+            <div class="form-group row">
+            <label for="konten" class="col-sm-3 col-form-label">Foto Artikel</label>
             <div class="col-sm-7">
-              <input type="file" class="form-control" name="konten" id="konten">
+              <input type="file" class="form-control" name="foto_artikel" id="foto_artikel">
             </div>
           </div>   
           <div class="form-group row">
@@ -92,8 +98,6 @@ $tanggal_terbit = "";
               <input type="date" class="form-control" name="tanggal_terbit" id="tanggal_terbit" value="<?php echo $tanggal_terbit; ?>">
             </div>
           </div>    
-          
-
           </div>
         </div>
 

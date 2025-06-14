@@ -41,11 +41,29 @@ if (mysqli_affected_rows($koneksi) == 1) {
   exit;
 }
 
-
-  
-
-
   }
+
+if (isset($_POST["submit_review"])) {
+    $rating = $_POST["rating"];
+    $komentar = mysqli_real_escape_string($koneksi, $_POST["komentar"]);
+    $id_produk = $result["id_produk"];
+    $date = date("Y-m-d"); 
+
+    $query = "INSERT INTO review (id_user, id_produk, rating, komentar, tanggal_review) 
+              VALUES ('$idUser', '$id_produk', '$rating', '$komentar', '$date')";
+
+    mysqli_query($koneksi, $query);
+
+    if (mysqli_affected_rows($koneksi) > 0) {
+        echo "<script>
+            alert('Review berhasil ditambahkan!');
+            window.location.href = window.location.href;
+        </script>";
+        exit;
+    } else {
+        echo "<script>alert('Gagal menambahkan review!');</script>";
+    }
+}
 
 
   $queryReview = "SELECT review.*, user.username, user.foto, user.jenis_kulit FROM review
@@ -152,7 +170,9 @@ if (mysqli_affected_rows($koneksi) == 1) {
     <?php else : foreach($review as $row) : ?>
     <article class="flex flex-col sm:flex-row sm:space-x-4 border border-[#3a3a2e] rounded-lg p-4 mb-6">
      <div class="flex-shrink-0 flex flex-col items-center sm:items-start mb-4 sm:mb-0">
-      <img alt="Profile image of Awalicia, a combination skin type woman with short hair" class="rounded-full w-16 h-16 object-cover mb-2" height="64" src="../../admin/foto/<?= $row['foto'] ?>" width="64"/>
+      <img alt="Profile image of Awalicia, a combination skin type woman with short hair" class="rounded-full w-16 h-16 object-cover mb-2" height="64" 
+      src="<?= !empty($row['foto']) ? '../../admin/foto/' . $row['foto'] : '../../admin/foto/default-user.png' ?>" 
+      width="64"/>
       <p class="text-xs sm:text-sm font-semibold">
        <?= $row["username"] ?>
       </p>
@@ -165,7 +185,7 @@ if (mysqli_affected_rows($koneksi) == 1) {
       <?= str_repeat('❤️', $row['rating']) ?>
       </div>
       <p>
-       Awalicia, recommends this product!
+       <?= $row["username"]?> , recommends this product!
        <br/>
        <?= $row["komentar"] ?>
       </p>
@@ -175,11 +195,34 @@ if (mysqli_affected_rows($koneksi) == 1) {
     <?php endif; ?>
    </section>
   </main>
-  <!-- Add to Reviews button -->
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-10 mb-10">
-   <button class="bg-[#4a503d] text-[#d9d9c3] text-sm font-semibold rounded-full px-6 py-2 hover:bg-[#3a3a2e] transition w-full sm:w-auto">
-    + Add To Reviews
-   </button>
-  </div>
+
+<!-- Add to Reviews Form -->
+<div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-10 mb-10">
+  <h3 class="font-semibold text-sm sm:text-base mb-2">Tulis Review Kamu</h3>
+  <?php if (!isset($_SESSION['id_user'])): ?>
+    <p class="text-sm text-red-600 mb-4">Silakan login terlebih dahulu untuk memberikan review.</p>
+  <?php else: ?>
+  <form action="" method="POST">
+    <div class="mb-4">
+      <label for="rating" class="block text-sm font-medium text-[#3a3a2e] mb-1">Rating:</label>
+      <select id="rating" name="rating" class="w-24 border border-[#3a3a2e] rounded px-2 py-1 text-sm">
+        <option value="1">1 ❤️</option>
+        <option value="2">2 ❤️❤️</option>
+        <option value="3">3 ❤️❤️❤️</option>
+        <option value="4">4 ❤️❤️❤️❤️</option>
+        <option value="5">5 ❤️❤️❤️❤️❤️</option>
+      </select>
+    </div>
+    <div class="mb-4">
+      <label for="komentar" class="block text-sm font-medium text-[#3a3a2e] mb-1">Komentar:</label>
+      <textarea id="komentar" name="komentar" rows="3" class="w-full border border-[#3a3a2e] rounded px-3 py-2 text-sm" placeholder="Tulis pengalamanmu menggunakan produk ini..."></textarea>
+    </div>
+    <button type="submit" name="submit_review" class="bg-[#4a503d] text-[#d9d9c3] text-sm font-semibold rounded-full px-6 py-2 hover:bg-[#3a3a2e] transition">
+      Kirim Review
+    </button>
+  </form>
+  <?php endif; ?>
+</div>
+
 
     <?php require('../../../components/footer.php'); ?> 

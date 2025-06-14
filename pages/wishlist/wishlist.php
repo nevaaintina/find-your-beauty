@@ -1,6 +1,13 @@
    <?php 
    include_once('../../components/header.php'); 
    include_once('../../function/function.php');
+
+   if (!isset($_SESSION['id_user']) || !isset($_SESSION['level'])) {
+    header("Location: ../register/login.php");
+    exit;
+}
+
+
    
    if (isset($_SESSION["id_user"])) {
       $idUser = $_SESSION["id_user"];

@@ -98,8 +98,10 @@ mysqli_query($koneksi,$sql_dp);
                       $posisi = ($halaman-1) * $batas;
                     }
                     
-                    $sql_u = "SELECT f.id_forum,u.username,f.judul_forum,f.isi_post, f.tanggal_post FROM forum f
-                    INNER JOIN user u ON u.id_user = f.id_user";
+                    $sql_u = "SELECT f.id_forum,u.username,f.judul_forum,k.isi_komentar, k.tanggal_komentar 
+                    FROM komentar_forum k 
+                    INNER JOIN user u ON u.id_user = k.id_user
+                    INNER JOIN forum f ON f.id_forum = k.id_forum";
 
                     if (isset($_GET["katakunci"])) {
                       $katakunci_forum = $_GET["katakunci"];
@@ -139,16 +141,18 @@ mysqli_query($koneksi,$sql_dp);
               <!-- /.card-body -->
               <div class="card-footer clearfix">
                 <?php
-                $sql_jum = "SELECT f.id_forum,u.username,f.judul_forum,f.isi_post, f.tanggal_post FROM forum f
-                    INNER JOIN user u ON u.id_user = f.id_user";
+                $sql_jum = "SELECT f.id_forum,u.username,f.judul_forum,k.isi_komentar, k.tanggal_komentar 
+                    FROM komentar_forum k 
+                    INNER JOIN user u ON u.id_user = k.id_user
+                    INNER JOIN forum f ON f.id_forum = k.id_forum";
 
                 if (isset($_GET["katakunci"])) {
                   $katakunci_forum = $_GET["katakunci"];
-                  $sql_jum .= " WHERE `id_forum` LIKE '%$katakunci_forum%'
-                      OR `username` LIKE '%$katakunci_forum%' 
-                      OR `judul_forum` LIKE '%$katakunci_forum%' 
-                      OR `tanggal_post` LIKE '%$katakunci_forum%' 
-                      OR `isi_post` LIKE '%$katakunci_forum%'";
+                  $sql_jum .= " WHERE `f.id_forum` LIKE '%$katakunci_forum%'
+                      OR `u.username` LIKE '%$katakunci_forum%' 
+                      OR `f.judul_forum` LIKE '%$katakunci_forum%' 
+                      OR `k.tanggal_komentar` LIKE '%$katakunci_forum%' 
+                      OR `k.isi_komentar` LIKE '%$katakunci_forum%'";
                 }
                 $query_jum = mysqli_query($koneksi, $sql_jum);
                 $jum_data = mysqli_num_rows($query_jum);

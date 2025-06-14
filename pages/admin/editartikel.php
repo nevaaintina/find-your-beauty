@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('auth.php');
 include('../../includes/db.php');
 
@@ -79,12 +78,12 @@ if(isset($_GET['data'])){
               <input type="text" class="form-control" name="judul_artikel" id="judul_artikel" value="<?php echo $judul_artikel; ?>">
             </div>
           </div>   
-          <div class="form-group row">
-            <label for="konten" class="col-sm-3 col-form-label">Konten</label>
-            <div class="col-sm-7">
-              <input type="file" class="form-control" name="konten" id="konten">
-            </div>
-          </div>  
+        <div class="form-group row">
+         <label for="konten" class="col-sm-3 col-form-label">Konten</label>
+        <div class="col-sm-7">
+         <textarea class="form-control" name="konten" id="konten" rows="10"><?php echo $konten; ?></textarea>
+          </div>
+        </div>
           <div class="form-group row">
             <label for="kategori_artikel" class="col-sm-3 col-form-label">Kategori</label>
             <div class="col-sm-7">
