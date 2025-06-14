@@ -6,7 +6,6 @@ $user = null;
 session_start();
 if (isset($_SESSION["id_user"])) {
   $idUser = (int)$_SESSION["id_user"];
-  $level = (string)$_SESSION["level"];
   $user = query("SELECT * FROM user WHERE id_user = '$idUser'")[0];
 }
 
@@ -46,7 +45,7 @@ if (isset($_SESSION["id_user"])) {
     </div>
     <div class="flex items-center space-x-4 text-xs font-semibold">
       
-<?php if ($_SESSION['level'] == "superadmin") : ?>
+<?php if (isset($_SESSION['level']) && $_SESSION["level"] == "superadmin") : ?>
     <span class="flex items-center gap-2">
     <i class="fas fa-user-circle text-lg"></i>
     <a href="/find-your-beauty/pages/admin/profil.php">
