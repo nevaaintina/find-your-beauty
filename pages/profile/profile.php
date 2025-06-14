@@ -1,92 +1,140 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../assets/css/global.css" />
-    <link rel="stylesheet" href="../../assets/css/style.css" />
-  </head>
-  <body>
-    <div class="wireframe-profil">
-      <div class="div">
-        <div class="rectangle"></div>
-        <img class="whatsapp-image" src="img/whatsapp-image-2025-05-26-at-17-02-31.png" />
-        <div class="text-wrapper">Tiara Kusuma</div>
-        <div class="overlap"><div class="text-wrapper-2">@Tiaraakusuma_</div></div>
-        <div class="overlap-group">
-          <div class="rectangle-2"></div>
-          <div class="text-wrapper-3">Edit Profil</div>
-        </div>
-        <div class="overlap-2">
-          <div class="rectangle-3"></div>
-          <img class="line" src="img/line-4.svg" />
-          <img class="img" src="img/line-5.svg" />
-          <img class="line-2" src="img/line-6.svg" />
-          <img class="line-3" src="img/line-7.svg" />
-          <div class="text-wrapper-4">Followers</div>
-          <div class="text-wrapper-5">Reviews</div>
-          <div class="text-wrapper-6">Post</div>
-          <div class="text-wrapper-7">Like</div>
-          <div class="text-wrapper-8">Following</div>
-          <div class="text-wrapper-9">0</div>
-          <div class="text-wrapper-10">7</div>
-          <div class="text-wrapper-11">0</div>
-          <div class="text-wrapper-12">0</div>
-          <div class="text-wrapper-13">0</div>
-        </div>
-        <div class="text-wrapper-14">Posts</div>
-        <div class="text-wrapper-15">Talks</div>
-        <div class="text-wrapper-16">Topics</div>
-        <div class="text-wrapper-17">Reviews</div>
-        <div class="overlap-3">
-          <img class="line-4" src="img/line-9.svg" /> <img class="line-5" src="img/line-10.svg" />
-        </div>
-        <div class="overlap-4">
-          <img class="line-6" src="img/line-11.svg" /> <img class="line-5" src="img/line-12.svg" />
-        </div>
-        <div class="rectangle-4"></div>
-        <div class="rectangle-5"></div>
-        <div class="overlap-5">
-          <div class="rectangle-6"></div>
-          <div class="rectangle-7"></div>
-          <img class="line-7" src="img/line-36.svg" />
-          <img class="rectangle-8" src="img/rectangle-120.png" />
-          <p class="by-NAT-NEVA-AWALIA">By&nbsp;&nbsp; NAT [ NEVA AWALIA TIARA ].</p>
-          <p class="p">© 2025 Your Find Glow. All Rights Reserved</p>
-        </div>
-        <img class="line-8" src="img/line-41.svg" />
-        <div class="overlap-6">
-          <div class="rectangle-9"></div>
-          <p class="find-your-glow-app">Find Your Glow App</p>
-        </div>
-        <div class="overlap-7">
-          <div class="rectangle-10"></div>
-          <img class="rectangle-11" src="img/rectangle-120.svg" />
-          <div class="rectangle-12"></div>
-          <p class="text-wrapper-18">R e v i e w s</p>
-          <p class="text-wrapper-19">P r o d u c t</p>
-          <p class="text-wrapper-20">R e c o m m e n d a t i on</p>
-          <p class="text-wrapper-21">F o r u m</p>
-          <p class="text-wrapper-22">A r t i c l e</p>
-          <p class="text-wrapper-23">W i s h l i s t</p>
-          <p class="text-wrapper-24">P r o f i l</p>
-          <img class="find-your-beauty" src="img/find-your-beauty-2.png" />
-          <div class="text-wrapper-25">Register / Login</div>
-          <div class="text-wrapper-26">Search</div>
-          <img class="header" src="img/header.png" />
-          <img class="group" src="img/group-2.png" />
-          <img class="vector" src="img/vector.svg" />
-          <img class="lsicon-down-filled" src="img/lsicon-down-filled.svg" />
-        </div>
-        <div class="overlap-8">
-          <img class="vector-2" src="img/image.svg" />
-          <div class="text-wrapper-27">My Profil</div>
-          <div class="text-wrapper-28">Edit Profil</div>
-          <div class="text-wrapper-29">Wishlist</div>
-          <img class="group-2" src="img/group.png" />
-          <div class="lucide-edit"><img class="group-3" src="img/image.png" /></div>
-        </div>
+<?php 
+  require('../../components/header.php');
+ require_once __DIR__ . '/../../function/function.php';
+  if (!isset($_SESSION['id_user']) || !isset($_SESSION['level'])) {
+     echo "<script>
+    alert('Silakan login terlebih dahulu!');
+    window.location.href = '/find-your-beauty/pages/register/login.php';
+    </script>";
+    exit;
+} else {
+  $idUser = $_SESSION["id_user"];
+  $user = query("SELECT * FROM user WHERE id_user = '$idUser'")[0];
+}
+?>
+  <!-- Main content area -->
+  <main class="flex-grow flex flex-col sm:flex-row max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 bg-[#f9f7f0]">
+   <!-- Sidebar -->
+   <aside class="bg-[#4a5523] w-full sm:w-48 text-[#f9f7f0] py-8 px-6 flex flex-col space-y-8">
+    <button class="flex items-center space-x-3 text-sm font-normal" type="button">
+     <i class="fas fa-user text-lg">
+     </i>
+     <span>
+      My Profil
+     </span>
+    </button>
+    <button class="flex items-center space-x-3 text-sm font-normal" type="button">
+     <i class="fas fa-edit text-lg">
+     </i>
+     <span>
+      Edit Profil
+     </span>
+    </button>
+    <button class="flex items-center space-x-3 text-sm font-normal" type="button">
+     <i class="fas fa-edit text-lg">
+     </i>
+     <span>
+      Wishlist
+     </span>
+    </button>
+   </aside>
+   <!-- Profile main content -->
+   <section class="flex-grow py-8 px-6">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-6 sm:space-y-0">
+     <div class="flex items-center space-x-6">
+  <img 
+    alt="Portrait of user" 
+    class="rounded-full w-16 h-16 object-cover" 
+    height="64" 
+    width="64"
+src="<?= !empty($row['foto']) ? '../admin/foto/' . $row['foto'] : '../admin/foto/default-user.png' ?>"
+
+
+
+  />
+      <div>
+       <p class="text-sm font-normal">
+        <?=$user["nama"]?>
+       </p>
+       <span class="inline-block bg-[#f9f7f0] text-xs text-[#4a5523] px-3 py-1 rounded-full font-normal mt-1">
+        @<?=$user["username"]?>
+       </span>
       </div>
+     </div>
+     <button class="bg-[#4a5523] text-[#f9f7f0] rounded-full px-6 py-2 text-sm font-normal whitespace-nowrap" type="button">
+      Edit Profil
+     </button>
     </div>
-  </body>
-</html>
+    <div class="mt-8 flex flex-wrap justify-between max-w-3xl text-xs font-normal text-[#4a5523]">
+     <div class="flex flex-col items-center px-4">
+      <span>
+       Followers
+      </span>
+      <span class="mt-1">
+       0
+      </span>
+     </div>
+     <div class="border-l border-[#4a5523] h-6">
+     </div>
+     <div class="flex flex-col items-center px-4">
+      <span>
+       Following
+      </span>
+      <span class="mt-1">
+       7
+      </span>
+     </div>
+     <div class="border-l border-[#4a5523] h-6">
+     </div>
+     <div class="flex flex-col items-center px-4">
+      <span>
+       Post
+      </span>
+      <span class="mt-1">
+       0
+      </span>
+     </div>
+     <div class="border-l border-[#4a5523] h-6">
+     </div>
+     <div class="flex flex-col items-center px-4">
+      <span>
+       Reviews
+      </span>
+      <span class="mt-1">
+       0
+      </span>
+     </div>
+     <div class="border-l border-[#4a5523] h-6">
+     </div>
+     <div class="flex flex-col items-center px-4">
+      <span>
+       Like
+      </span>
+      <span class="mt-1">
+       0
+      </span>
+     </div>
+    </div>
+    <nav class="mt-8 max-w-3xl border-b border-[#4a5523] text-xs font-normal flex space-x-8">
+     <a class="pb-1 border-b border-[#4a5523]" href="#">
+      Posts
+     </a>
+     <a class="pb-1" href="#">
+      Reviews
+     </a>
+     <a class="pb-1" href="#">
+      Topics
+     </a>
+     <a class="pb-1" href="#">
+      Talks
+     </a>
+    </nav>
+   </section>
+  </main>
+  <!-- Empty white space below main content -->
+  <div class="bg-[#f9f7f0] h-16">
+  </div>
+<?php 
+  // require('../../components/footer.php');
+
+?>
