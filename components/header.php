@@ -6,6 +6,7 @@ $user = null;
 session_start();
 if (isset($_SESSION["id_user"])) {
   $idUser = (int)$_SESSION["id_user"];
+  $level = (string)$_SESSION["level"];
   $user = query("SELECT * FROM user WHERE id_user = '$idUser'")[0];
 }
 
@@ -44,18 +45,29 @@ if (isset($_SESSION["id_user"])) {
     <div class="flex-1">
     </div>
     <div class="flex items-center space-x-4 text-xs font-semibold">
-<?php if (isset($_SESSION['id_user'])) : ?>
-  <span class="flex items-center gap-2">
+      
+<?php if ($_SESSION['level'] == "superadmin") : ?>
+    <span class="flex items-center gap-2">
+    <i class="fas fa-user-circle text-lg"></i>
+    <a href="/find-your-beauty/pages/admin/profil.php">
+    <span>Admin <?= htmlspecialchars($user["username"]) ?> </span>
+    </a>
+    <a href="/find-your-beauty/pages/register/logout.php" class="text-sm text-red-600 hover:underline ml-2">
+      Logout
+    </a>
+  </span>
+<?php elseif (isset($_SESSION['id_user'])) : ?>
+<span class="flex items-center gap-2">
     <i class="fas fa-user-circle text-lg"></i>
     <span><?= htmlspecialchars($user["username"]) ?></span>
     <a href="/find-your-beauty/pages/register/logout.php" class="text-sm text-red-600 hover:underline ml-2">
       Logout
     </a>
   </span>
-<?php else: ?>
-  <a href="/find-your-beauty/pages/register/login.php" class="text-sm hover:underline">
-    <span>Register / Login</span>
-  </a>
+  <?php else : ?>
+    <a href="/find-your-beauty/pages/register/login.php" class="text-sm hover:underline">
+      <span>Register / Login</span>
+    </a>
 <?php endif; ?>
 
     </div>

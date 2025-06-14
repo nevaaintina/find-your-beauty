@@ -5,8 +5,8 @@ include('../../includes/db.php');
 if((isset($_GET['aksi']))&&(isset($_GET['data']))){
 if($_GET['aksi']=='hapus'){
 $id_forum = $_GET['data'];
-// Hapus data terkait terlebih dahulu
-  mysqli_query($koneksi, "DELETE FROM komentar_forum WHERE id_forum = '$id_forum'");
+// // Hapus data terkait terlebih dahulu
+//   mysqli_query($koneksi, "DELETE FROM komentar_forum WHERE id_forum = '$id_forum'");
 //hapus data
 $sql_dp = "DELETE from `forum`
 where `id_forum` = '$id_forum'";
@@ -80,10 +80,7 @@ mysqli_query($koneksi,$sql_dp);
                     <thead>                  
                       <tr>
                         <th width="5%">No</th>
-                        <th width="20%">Username</th>
                         <th width="20%">Judul Forum</th>
-                        <th width="20%">Isi</th>
-                        <th width="20%">Tanggal Post</th>
                         <th width="15%"><center>Aksi</center></th>
                       </tr>
                     </thead>
@@ -98,18 +95,13 @@ mysqli_query($koneksi,$sql_dp);
                       $posisi = ($halaman-1) * $batas;
                     }
                     
-                    $sql_u = "SELECT f.id_forum,u.username,f.judul_forum,k.isi_komentar, k.tanggal_komentar 
-                    FROM komentar_forum k 
-                    INNER JOIN user u ON u.id_user = k.id_user
-                    INNER JOIN forum f ON f.id_forum = k.id_forum";
+                    $sql_u = "SELECT * FROM forum";
 
                     if (isset($_GET["katakunci"])) {
                       $katakunci_forum = $_GET["katakunci"];
                       $sql_u .= " WHERE `id_forum` LIKE '%$katakunci_forum%'
-                      OR `username` LIKE '%$katakunci_forum%' 
-                      OR `judul_forum` LIKE '%$katakunci_forum%' 
-                      OR `tanggal_post` LIKE '%$katakunci_forum%' 
-                      OR `isi_post` LIKE '%$katakunci_forum%'";
+                      OR `judul_forum` LIKE '%$katakunci_forum%'";
+ 
                     }
                     $sql_u .= " ORDER BY `id_forum` LIMIT $posisi, $batas";
                     $query_u = mysqli_query($koneksi, $sql_u);
@@ -117,19 +109,13 @@ mysqli_query($koneksi,$sql_dp);
                     
                     while ($data_u = mysqli_fetch_row($query_u)) {
                       $id_forum = $data_u[0];
-                      $username = $data_u[1];
-                      $judul_forum = $data_u[2];
-                      $isi_post = $data_u[3];
-                      $tanggal_post = $data_u[4];
+                      $judul_forum = $data_u[1];
 
                       echo "<tr>
                       <td>$no</td>
-                      <td>$username</td>
                       <td>$judul_forum</td>
-                       <td>$isi_post</td>
-                        <td>$tanggal_post</td>
                       <td align='center'>
-                      <a href=\"javascript:if(confirm('Anda yakin ingin menghapus data $isi_post?')) window.location.href='forum.php?aksi=hapus&data=$id_forum&notif=hapusberhasil'\" class='btn btn-xs btn-warning'><i class='fas fa-trash'></i> Hapus</a>
+                      <a href=\"javascript:if(confirm('Anda yakin ingin menghapus data $judul_forum?')) window.location.href='forum.php?aksi=hapus&data=$id_forum&notif=hapusberhasil'\" class='btn btn-xs btn-warning'><i class='fas fa-trash'></i> Hapus</a>
                       </td>
                       </tr>";
                       $no++;
@@ -141,18 +127,12 @@ mysqli_query($koneksi,$sql_dp);
               <!-- /.card-body -->
               <div class="card-footer clearfix">
                 <?php
-                $sql_jum = "SELECT f.id_forum,u.username,f.judul_forum,k.isi_komentar, k.tanggal_komentar 
-                    FROM komentar_forum k 
-                    INNER JOIN user u ON u.id_user = k.id_user
-                    INNER JOIN forum f ON f.id_forum = k.id_forum";
+                $sql_jum = "SELECT * FROM forum";
 
                 if (isset($_GET["katakunci"])) {
                   $katakunci_forum = $_GET["katakunci"];
-                  $sql_jum .= " WHERE `f.id_forum` LIKE '%$katakunci_forum%'
-                      OR `u.username` LIKE '%$katakunci_forum%' 
-                      OR `f.judul_forum` LIKE '%$katakunci_forum%' 
-                      OR `k.tanggal_komentar` LIKE '%$katakunci_forum%' 
-                      OR `k.isi_komentar` LIKE '%$katakunci_forum%'";
+                  $sql_jum .= " WHERE `id_forum` LIKE '%$katakunci_forum%'
+                      OR `judul_forum` LIKE '%$katakunci_forum%'";
                 }
                 $query_jum = mysqli_query($koneksi, $sql_jum);
                 $jum_data = mysqli_num_rows($query_jum);
