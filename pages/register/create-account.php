@@ -324,10 +324,36 @@
 </head>
 <body>
 
+<?php 
+require '../../function/function.php';
+
+if (isset($_POST["submit"])) {
+  if (register($_POST) > 0) {
+    echo "<script>
+    document.location.href = 'login.php'
+    </script>";
+  }
+}
+
+
+?>
+
+
 
 <main>
   <h1>Create Account</h1>
-  <form action="#" method="POST" aria-label="Create Account Form" autocomplete="off">
+  <form action="" method="POST" aria-label="Create Account Form" autocomplete="off">
+    <label for="name">Name</label>
+    <input 
+      id="name" 
+      name="name" 
+      type="text" 
+      placeholder="name" 
+      required 
+      autocomplete="off" 
+      autocorrect="off" 
+      autocapitalize="none"
+    />
     <label for="username">Username</label>
     <input 
       id="username" 
@@ -336,17 +362,6 @@
       placeholder="Username" 
       required 
       autocomplete="off" 
-      autocorrect="off" 
-      autocapitalize="none"
-    />
-    <label for="password">Password</label>
-    <input 
-      id="password" 
-      name="password" 
-      type="password" 
-      placeholder="Password" 
-      required 
-      autocomplete="new-password"
       autocorrect="off" 
       autocapitalize="none"
     />
@@ -361,7 +376,29 @@
       autocorrect="off" 
       autocapitalize="none"
     />
-    <button type="submit" aria-label="Register">REGISTER</button>
+    <label for="password">Password</label>
+    <input 
+      id="password" 
+      name="password" 
+      type="password" 
+      placeholder="Password" 
+      required 
+      autocomplete="new-password"
+      autocorrect="off" 
+      autocapitalize="none"
+    />
+    <label for="confirm_password">Confirm Password</label>
+    <input 
+      id="password" 
+      name="confirm_password" 
+      type="password" 
+      placeholder="Confirm Password" 
+      required 
+      autocomplete="new-password"
+      autocorrect="off" 
+      autocapitalize="none"
+    />
+    <button type="submit" name="submit" aria-label="Register">REGISTER</button>
   </form>
 </main>
 

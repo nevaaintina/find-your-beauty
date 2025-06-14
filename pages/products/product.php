@@ -1,4 +1,4 @@
-  <?php include_once('../../components/header.php'); ?> 
+  <?php require('../../components/header.php'); ?> 
 
   <!-- Main content -->
   <main class="flex-grow max-w-4xl mx-auto px-4 py-6">
@@ -24,43 +24,36 @@
     </p>
     <div class="max-w-3xl mx-auto border border-[#c6c6b1] rounded px-6 py-4 grid grid-cols-2 sm:grid-cols-4 gap-y-4 text-[10px] text-[#9a9a8a] font-light">
      <div>
+      <a href="detail.php?category=Cleanser">
       <div class="font-semibold tracking-widest mb-1">
        Cleanser
       </div>
+      </a>
       <ul class="space-y-1">
-        <a href="">
        <li>
         Micellar Water
        </li>
-       </a>
-       <a href="">
        <li>
         Facial Wash
        </li>
-       </a>
-       <a href="">
        <li>
         Cleansing Oil
        </li>
-       </a>
       </ul>
      </div>
      <div>
+      <a href="detail.php?category=Treatment">
       <div class="font-semibold tracking-widest mb-1">
        Treatment
       </div>
+      </a>
       <ul class="space-y-1">
-        <a href="">
        <li>
         Serum
        </li>
-       </a>
-       <a href="">
        <li>
         Peeling
        </li>
-       </a>
-       <a href="">
        <li>
         Eye Treatment
        </li>
@@ -68,38 +61,34 @@
       </ul>
      </div>
      <div>
+      <a href="detail.php?category=Mask">
       <div class="font-semibold tracking-widest mb-1">
        Mask
       </div>
+      </a>
       <ul class="space-y-1">
-        <a href="">
        <li>
         Sleeping Mask
        </li>
-       </a>
-       <a href="">
        <li>
         Mask Sheet
        </li>
-       </a>
       </ul>
      </div>
      <div>
+      <a href="detail.php?category=Moisturizer">
       <div class="font-semibold tracking-widest mb-1">
        Moisturizer
       </div>
+      </a>
       <ul class="space-y-1">
-        <a href="">
        <li>
         Sun Protection
        </li >
-       </a>
-       <a href="">
        <li>
         Gel
        </li>
        </a>
-       <a href="">
        <li>
         Cream
        </li>

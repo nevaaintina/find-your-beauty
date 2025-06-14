@@ -1,3 +1,17 @@
+<?php 
+
+require(__DIR__ . "/../function/function.php");
+
+$user = null;
+session_start();
+if (isset($_SESSION["id_user"])) {
+  $idUser = (int)$_SESSION["id_user"];
+  $user = query("SELECT * FROM user WHERE id_user = '$idUser'")[0];
+}
+
+
+?>
+
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
@@ -30,13 +44,20 @@
     <div class="flex-1">
     </div>
     <div class="flex items-center space-x-4 text-xs font-semibold">
-      <a href="/find-your-beauty/pages/register/login.php">
-     <span>
-      Register / Login
-     </span>
-     </a>
-     <i class="fas fa-user-circle text-lg">
-     </i>
+<?php if (isset($_SESSION['id_user'])) : ?>
+  <span class="flex items-center gap-2">
+    <i class="fas fa-user-circle text-lg"></i>
+    <span><?= htmlspecialchars($user["username"]) ?></span>
+    <a href="/find-your-beauty/pages/register/logout.php" class="text-sm text-red-600 hover:underline ml-2">
+      Logout
+    </a>
+  </span>
+<?php else: ?>
+  <a href="/find-your-beauty/pages/register/login.php" class="text-sm hover:underline">
+    <span>Register / Login</span>
+  </a>
+<?php endif; ?>
+
     </div>
    </div>
   </div>
@@ -69,9 +90,8 @@
    <a class="hover:text-[#6e6a5a]" href="/find-your-beauty/pages/wishlist/wishlist.php">
     Wishlist
    </a>
-   <a class="hover:text-[#6e6a5a]" href="#">
+   <a class="hover:text-[#6e6a5a]" href="/find-your-beauty/pages/profile/profile.php">
     Profil
    </a>
   </nav>
   
-

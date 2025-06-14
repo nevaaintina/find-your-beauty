@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>Find Your Glow App - Cleanser</title>
+  <?php 
+  require('../../components/header.php');
+
+  
+  ?> 
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
@@ -252,92 +252,48 @@
   </style>
   <!-- Google Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-</head>
-<body>
 
-<header>
-  <div class="header-inner" role="banner" aria-label="Header navigation">
-    <div class="logo" tabindex="0">Find Your Glow App</div>
 
-    <div class="search-bar" role="search">
-      <input 
-        type="search" 
-        aria-label="Search products" 
-        placeholder="Search..." />
-    </div>
+<?php 
+require_once __DIR__ . '/../../function/function.php';
 
-    <div class="user-controls" aria-label="User controls">
-      <button aria-label="Register or Login" title="Register / Login" tabindex="0">
-        <span class="material-icons" aria-hidden="true">person_outline</span>
-      </button>
-      <button aria-label="Language selector" title="Select Language" tabindex="0">
-        <span class="material-icons" aria-hidden="true">language</span>
-      </button>
-    </div>
-  </div>
-</header>
+if (isset($_GET["category"])) {
+  $category = $_GET["category"];
 
-<nav class="primary-nav" role="navigation" aria-label="Primary site navigation">
-  <div class="nav-inner">
-    <div class="nav-item" tabindex="0">Product</div>
-    <div class="nav-item" tabindex="0">Reviews</div>
-    <div class="nav-item" tabindex="0">Recommendation</div>
-    <div class="nav-item" tabindex="0">Forum</div>
-    <div class="nav-item" tabindex="0" style="font-style: italic; color:#8f8e7d;">Article</div>
-    <div class="nav-item" tabindex="0" style="font-style: normal; font-weight: 400; color:#a09879;">Wishlist</div>
-    <div class="nav-item" tabindex="0" style="font-style: italic; font-weight: 400; color:#a09879;">Profil</div>
-  </div>
-</nav>
+  $query = "SELECT * FROM produk WHERE kategori_produk = '$category' ORDER BY sub_kategori ASC, nama_produk ASC";
+  $produk = query($query);
 
+  $produk_by_sub = [];
+
+foreach ($produk as $item) {
+  $sub = $item['sub_kategori'] ?? 'Lainnya';
+  $produk_by_sub[$sub][] = $item;
+}
+
+}
+
+
+
+?>
 <main>
-  <h2 class="section-title" aria-label="Section Title Cleanser" tabindex="0">CLEANSER</h2>
+  
+  <h2 class="section-title" aria-label="Section Title <?= strtoupper($category) ?>" tabindex="0"><?= strtoupper($category) ?></h2>
 
-  <section aria-labelledby="micellarwater-label" class="product-row">
-    <div class="product-row-label" id="micellarwater-label">Micelar Water</div>
-    <div class="product-card">
-      <img src="https://placehold.co/140x160/png?text=Garnier+Micellar+Water+Pink+Bottle" alt="Micellar Water Garnier pink bottle product" loading="lazy" />
-    </div>
-    <div class="product-card">
-      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9c4fab4c-5b49-4ae2-b167-accf9b22c2c3.png" alt="Micellar Water Innisfree green bottle product" loading="lazy" />
-    </div>
-    <div class="product-card">
-      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/95da8cbb-99cd-4cd2-b7c5-35eb3b1e556d.png" alt="Simple Micellar Water clear bottle product" loading="lazy" />
-    </div>
-  </section>
+  <?php foreach ($produk_by_sub as $sub => $items) : ?>
+    <section aria-labelledby="<?= strtolower(str_replace(' ', '', $sub)) ?>-label" class="product-row">
+      <div class="product-row-label" id="<?= strtolower(str_replace(' ', '', $sub)) ?>-label"><?= htmlspecialchars($sub) ?></div>
 
-  <section aria-labelledby="facialwash-label" class="product-row">
-    <div class="product-row-label" id="facialwash-label">Facial Wash</div>
-    <div class="product-card">
-      <img src="https://placehold.co/140x160/png?text=Cetaphil+Facial+Wash+Blue+Bottle" alt="Cetaphil Facial Wash blue bottle product" loading="lazy" />
-    </div>
-    <div class="product-card">
-      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/65810c21-dbd7-4966-b086-8e243575b92c.png" alt="Clay Facial Wash white tube product" loading="lazy" />
-    </div>
-    <div class="product-card">
-      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6a835dbe-edf8-4e9f-b82f-9b0ee61daaf3.png" alt="Senka Perfect Whip blue tube product" loading="lazy" />
-    </div>
-  </section>
-
-  <section aria-labelledby="cleansingoil-label" class="product-row">
-    <div class="product-row-label" id="cleansingoil-label">Cleansing Oil</div>
-    <div class="product-card">
-      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/aa0f5497-adb3-4940-be48-eeaf70d9734b.png" alt="Lanville Cleansing Oil pump bottle product" loading="lazy" />
-    </div>
-    <div class="product-card">
-      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b86f2334-d0d6-4d0a-bf31-7b196457091b.png" alt="Alpha Cleansing Oil purple pump bottle product" loading="lazy" />
-    </div>
-    <div class="product-card">
-      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c68b5246-96dc-4a65-949d-a364fcae03cf.png" alt="MAKE UP Cleansing Oil clear pump bottle product" loading="lazy" />
-    </div>
-  </section>
+      <?php foreach ($items as $produk) : ?>
+        <div class="product-card">
+          <a href="detail/detail-product.php?produk=<?=$produk['id_produk']?>">
+          <img src="../admin/foto_produk/<?= $produk['foto_produk'] ?>" alt="<?= $produk['nama_produk'] ?>" loading="lazy" />
+          </a>
+        </div>
+      <?php endforeach; ?>
+    </section>
+  <?php endforeach; ?>
 </main>
 
-<footer role="contentinfo">
-  <p>
-    © 2025 Your Find Glow. All Rights Reserved. <br />
-    By <a href="#" tabindex="0">NAT | NEVA AWALIA TIARA</a>.
-  </p>
-</footer>
-
-</body>
-</html>
+<?php 
+  require('../../components/footer.php');
+?>
