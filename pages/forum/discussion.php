@@ -1,4 +1,10 @@
-  <?php include_once('../../components/header.php'); 
+  <?php 
+  include_once('../../components/header.php'); 
+  if (!isset($_SESSION['id_user']) || !isset($_SESSION['level'])) {
+    header("Location: ../register/login.php");
+    exit;
+}
+
   require_once __DIR__ . '/../../function/function.php';
 
   $forum = query("SELECT * FROM forum");

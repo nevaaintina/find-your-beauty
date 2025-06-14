@@ -1,13 +1,20 @@
 <?php include_once('../../components/header.php'); ?>
 
-<!DOCTYPE html>
+<div style="padding: 16px; margin-bottom: -16px;">
+  <a href="article.php" style="display: inline-flex; align-items: center; color: var(--color-accent); text-decoration: none; font-weight: 600;">
+    <span class="material-icons" style="font-size: 20px; margin-right: 6px;"></span>
+    Kembali
+  </a>
+</div>
+
+<!-- <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Find Your Glow App</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /> -->
 <style>
   /* Root & variables for spacing and colors */
   :root {
@@ -299,62 +306,50 @@
 </head>
 <body>
 
-
 <main role="main" class="container" tabindex="-1">
-  <h2 class="page-title">Beauty Secrets</h2>
+
+<?php 
+  require_once __DIR__ . '/../../function/function.php';
+
+  if (isset($_GET["id"])) {
+    $articleId = $_GET["id"];
+
+    $query = "SELECT * FROM artikel WHERE id_artikel = '$articleId'";
+    $artikel = query($query)[0];
+
+
+    $otherArticle = query("SELECT * FROM artikel WHERE id_artikel != '$articleId'");
+  }
+
+?>
 
   <article class="beauty-secrets" aria-label="Beauty Secrets Article">
     <section class="article-content">
-      <h3>Kulit Sehat Bukan Hasil instan: Memahami Perjalanan Skincare yang Realistis</h3>
+      <h3><?= $artikel["judul_artikel"] ?></h3>
+      <h5>By <?= $artikel["penulis"] . "  -   " . $artikel["tanggal_terbit"]?></h5>
+            <img
+              src="../admin/file_artikel/<?= $artikel['foto_artikel'] ?>"
+              alt="Healthy skincare meal with balanced nutrition on plates arranged artfully on a wooden table"
+              class="article-image"
+              loading="lazy"
+            />
       <p>
-        Dalam era media sosial yang serba cepat, banyak orang mengharapkan hasil instan dari produk skincare. Iklan-iklan yang menjanjikan kulit cerah dalam tiga hari atau jerawat hilang dalam semalam kerap membentuk ekspektasi yang tidak realistis. Padahal, kesehatan kulit merupakan hasil dari perawatan konsisten dan pemahaman mendalam tentang kebutuhan kulit itu sendiri.
+        <?= $artikel["konten"] ?>
       </p>
-      <p>
-        Kulit manusia memiliki siklus regenerasi alami yang berlangsung sekitar 28 hari. Artinya, hasil dari penggunaan suatu produk skincare idealnya baru bisa dinilai setelah minimal satu bulan pemakaian teratur. Mengganti-ganti produk terlalu cepat atau mencampur banyak bahan aktif sekaligus justru bisa memicu iritasi atau breakout.
-      </p>
-      <img
-        src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b1c681d5-fd6d-44e6-93c5-c4807e099c24.png"
-        alt="Healthy skincare meal with balanced nutrition on plates arranged artfully on a wooden table"
-        class="article-image"
-        loading="lazy"
-      />
-      <p>
-        Langkah awal yang penting adalah memahami jenis kulit: apakah kering, berminyak, kombinasi, atau sensitif. Kesalahan dalam identifikasi bisa menyebabkan pemilihan produk yang tidak tepat. Misalnya, kulit berminyak yang diperketat layaknya kulit kering bisa memperparah produksi sebum.
-      </p>
-      <p>
-        Selain itu, rutinitas dasar skincare tidak harus rumit. Pembersih wajah yang lembut, pelembap sesuai jenis kulit, dan tabir surya adalah fondasi penting yang tidak boleh diabaikan. Penggunaan bahan aktif seperti retinol, niacinamide, atau AHA/BHA sebaiknya disesuaikan dengan kondisi kulit dan dilakukan secara bertahap.
-      </p>
-      <p>
-        Yang juga tak kalah penting, gaya hidup turut memengaruhi kondisi kulit. Pola makan, kualitas tidur, tingkat stres, dan konsumsi air harian memiliki peran besar terhadap kesehatan kulit. Skincare dari luar hanya akan efektif jika didukung oleh perawatan dari dalam.
-      </p>
-      <p>
-        Perjalanan menuju kulit sehat bukanlah perlombaan cepat, melainkan investasi jangka panjang. Menyadari bahwa setiap orang memiliki kondisi kulit yang unik akan membantu kita lebih bijak dalam memilih dan menggunakan produk. Fokus pada konsistensi, kesabaran, dan pemahaman diri akan jauh lebih efektif dibanding mengejar hasil instan.
-      </p>
+
     </section>
 
     <aside class="sidebar" aria-label="Related articles sidebar">
       <h4>the other thing</h4>
+      <?php foreach($otherArticle as $articleRow) :  ?>
       <article class="article-item" tabindex="0">
-        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/015c48a1-b07b-4cca-8e4b-8465544a7e8b.png" alt="Portrait of Chealsea Idan smiling during interview" loading="lazy" />
+        <img src="../admin/file_artikel/<?= $articleRow['foto_artikel'] ?>" alt="Portrait of Chealsea Idan smiling during interview" loading="lazy" />
         <div class="item-info">
-          <a href="#" tabindex="-1">Chealsea Idan Spill Powerful Kuit Slow Aging Bersama 5 Beauty Labs</a>
-          <time class="item-date" datetime="2025-05-10">10 Mei 2025</time>
+          <a href="detail-article.php?id=<?=$articleRow["id_artikel"]?>" tabindex="-1"><?= $articleRow["judul_artikel"] ?></a>
+          <time class="item-date" datetime="2025-05-10"><?= $articleRow["tanggal_terbit"] ?></time>
         </div>
       </article>
-      <article class="article-item" tabindex="0">
-        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e60b9bb1-a782-405c-95a9-2d2c10f1518e.png" alt="Close-up of skincare products with natural ingredients" loading="lazy" />
-        <div class="item-info">
-          <a href="#" tabindex="-1">Panduan Skincare Awetmu di Usia Senja</a>
-          <time class="item-date" datetime="2025-05-08">08 Mei 2025</time>
-        </div>
-      </article>
-      <article class="article-item" tabindex="0">
-        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a4638027-79a4-415e-bf6c-9dd8018f0eb9.png" alt="Turmeric face mask and natural ingredients on wooden table" loading="lazy" />
-        <div class="item-info">
-          <a href="#" tabindex="-1">Super Turmeric Face Mask untuk Orangnya Kulit Produk alami Menghasilkan kulit Ormanan Toast</a>
-          <time class="item-date" datetime="2025-05-05">05 Mei 2025</time>
-        </div>
-      </article>
+        <?php endforeach; ?>
     </aside>
   </article>
 </main>

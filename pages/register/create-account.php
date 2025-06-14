@@ -325,7 +325,7 @@
 <body>
 
 <?php 
-require '../../function/function.php';
+// require '../../function/function.php';
 
 if (isset($_POST["submit"])) {
   if (register($_POST) > 0) {

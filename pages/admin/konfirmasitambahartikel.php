@@ -6,11 +6,12 @@ include('../../includes/db.php');
     $judul_artikel = $_POST['judul_artikel'];
     $kategori_artikel = $_POST['kategori_artikel'];
     $penulis = $_POST['penulis'];
+    $konten = $_POST['konten'];
     $tanggal_terbit = $_POST['tanggal_terbit'];
 
 if(empty($judul_artikel)){
     header("Location:tambahartikel.php?data=&notif=tambahkosong&jenis=judul_artikel");
-} else if(!isset($_FILES['konten']) || $_FILES['konten']['error'] != 0){
+} else if(empty($konten)){
     header("Location:tambahartikel.php?data=&notif=tambahkosong&jenis=konten");
 } else if(empty($kategori_artikel)){
     header("Location:tambahartikel.php?data=&notif=tambahkosong&jenis=kategori_artikel");
@@ -19,30 +20,18 @@ if(empty($judul_artikel)){
 } else if(empty($tanggal_terbit)){
     header("Location:tambahartikel.php?data=&notif=tambahkosong&jenis=tanggal_terbit");
 } else {
-    // Proses upload file
-    $konten = '';
-    if (isset($_FILES['konten']) && $_FILES['konten']['error'] == 0) {
-        $folder = '../admin//file_artikel/';
-        if (!is_dir($folder)) {
-            mkdir($folder, 0755, true);
-        }
+    // Proses upload file foto
+$lokasi_file = $_FILES['foto_artikel']['tmp_name'];
+$nama_file = $_FILES['foto_artikel']['name'];
+var_dump($nama_file);
+$direktori = 'file_artikel/' . $nama_file;
 
-        $file_tmp = $_FILES['konten']['tmp_name'];
-        $file_name = basename($_FILES['konten']['name']);
-        $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
-        $new_name = time() . '_' . preg_replace("/[^a-zA-Z0-9.]/", "_", $file_name);
-        $file_dest = $folder . $new_name;
+if (!empty($lokasi_file)) {
+  move_uploaded_file($lokasi_file, $direktori);
+}
 
-        if (move_uploaded_file($file_tmp, $file_dest)) {
-            $konten = $new_name;
-        } else {
-            header("Location:tambahartikel.php?notif=gagalupload");
-            exit;
-        }
-    }
-
-    $sql = "INSERT INTO artikel(judul_artikel, konten, kategori_artikel, penulis, tanggal_terbit) 
-            VALUES ('$judul_artikel','$konten','$kategori_artikel','$penulis','$tanggal_terbit')";
+    $sql = "INSERT INTO artikel(judul_artikel, konten, kategori_artikel, penulis, tanggal_terbit, foto_artikel) 
+            VALUES ('$judul_artikel','$konten','$kategori_artikel','$penulis','$tanggal_terbit', '$nama_file')";
     mysqli_query($koneksi,$sql);
     header("Location:artikel.php?notif=tambahberhasil");
 }

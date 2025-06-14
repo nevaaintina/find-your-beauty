@@ -6,9 +6,9 @@
     <h2 class="text-xl font-semibold mb-4 leading-snug">
      Temukan Produk Skincare Untuk Kulit Sehat Berseri
     </h2>
-    <button class="bg-[#6e6a5a] text-white text-sm font-semibold rounded-md px-6 py-2 hover:bg-[#5a5749] transition">
+    <a href="/find-your-beauty/pages/products/product.php" class="bg-[#6e6a5a] text-white text-sm font-semibold rounded-md px-6 py-2 hover:bg-[#5a5749] transition">
      Lihat Produk
-    </button>
+    </a>
    </div>
    <div class="flex-1 flex justify-center md:justify-end">
     <img alt="Close-up portrait of a woman with clear skin touching her face with her hand" class="rounded-md max-w-full h-auto" height="200" src="https://storage.googleapis.com/a1aa/image/0c034fab-55ed-4ad3-a9a0-010af7da10c0.jpg" width="300"/>
