@@ -1,5 +1,16 @@
 <!-- Main banner -->
-<?php include_once('components/header.php'); ?>
+<?php include_once('components/header.php');
+require_once __DIR__ . '/function/function.php';
+
+$article = query("SELECT * FROM artikel ORDER BY tanggal_terbit")[0];
+
+$konten = strip_tags($article["konten"]);
+$kata = explode(' ', $konten);
+$preview = implode(' ', array_slice($kata, 0, 30));
+
+
+
+?>
 
   <section class="max-w-7xl mx-auto bg-[#d6cfc3] rounded-md mt-6 px-6 py-6 flex flex-col md:flex-row items-center md:items-start gap-6">
    <div class="flex-1 text-[#3a3a3a]">
@@ -85,20 +96,17 @@
   <section class="max-w-7xl mx-auto mt-10 px-6 py-6 flex flex-col md:flex-row items-center bg-[#f5f0e9] gap-6">
    <div class="flex-1 text-[#3a3a3a] text-sm leading-relaxed">
     <h4 class="font-playfair font-semibold text-base mb-3">
-     9 Skincare Terbaik Untuk Menjaga Kesehatan Kulit
+    <?= $article["judul_artikel"] ?>
     </h4>
     <p>
-     Untuk mendapatkan hasil yang maksimal, skincare perlu digunakan secara
-        rutin. Ada produk yang bisa digunakan pada pagi dan siang hari, ada
-        pula yang khusus dipakai pada malam hari. Anda bisa memilih rutinitas
-        perawatan kulit dengan menggunakan basic skincare.
+    <?= $preview?> ....
     </p>
-    <button aria-label="Learn more about 9 Skincare Terbaik Untuk Menjaga Kesehatan Kulit" class="mt-4 text-[#6e6a5a] font-semibold text-xs hover:underline">
+    <a href="/find-your-beauty/pages/articles/detail-article.php?id=<?=$article["id_artikel"] ?>" aria-label="Learn more about 9 Skincare Terbaik Untuk Menjaga Kesehatan Kulit" class="mt-4 text-[#6e6a5a] font-semibold text-xs hover:underline">
      Learn More
-    </button>
+    </a>
    </div>
    <div class="flex-1 flex justify-center md:justify-end">
-    <img alt="Portrait of a woman with clear skin posing with hand near her face" class="rounded-md max-w-full h-auto" height="180" src="https://storage.googleapis.com/a1aa/image/0b8aa715-e001-40c7-780a-205849423fe2.jpg" width="280"/>
+    <img alt="Portrait of a woman with clear skin posing with hand near her face" class="rounded-md max-w-full h-auto" height="180" src="pages/admin/file_artikel/<?= $article['foto_artikel'] ?>" width="280"/>
    </div>
   </section>
 

@@ -76,9 +76,12 @@ if (isset($_SESSION["id_user"])) {
    <!-- bg-[#4f5730] text-[11px] text-white px-4 py-1 font-sans -->
   <header class="bg-[#f5f0e9] py-4 border-b border-[#d6cfc3]">
    <div class="max-w-7xl mx-auto flex justify-center">
-    <h1 class="font-playfair text-2xl text-[#3a3a3a] font-semibold tracking-wide">
-     Find Your Beauty
-    </h1>
+<a href="/find-your-beauty" class="group inline-block transition duration-300 ease-in-out">
+  <h1 class="font-playfair text-2xl text-[#3a3a3a] font-semibold tracking-wide transform transition duration-300 group-hover:scale-105 group-hover:text-[#7a7a5c]">
+    Find Your Beauty
+  </h1>
+</a>
+
    </div>
   </header>
   <!-- Navigation -->
@@ -89,7 +92,7 @@ if (isset($_SESSION["id_user"])) {
    <a class="hover:text-[#6e6a5a]" href="/find-your-beauty/pages/reviews/reviews.php">
     Reviews
    </a>
-   <a class="hover:text-[#6e6a5a]" href="#">
+   <a class="hover:text-[#6e6a5a]" href="/find-your-beauty/pages/recommendation/recommendation.php">
     Recommendation
    </a>
    <a class="hover:text-[#6e6a5a]" href="/find-your-beauty/pages/forum/discussion.php">
