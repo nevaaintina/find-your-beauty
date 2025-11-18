@@ -34,7 +34,7 @@ mysqli_query($koneksi,$sql_dp);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3><i class="fa fa-graduation-cap"></i>Produk</h3>
+            <h3></i>Produk</h3>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -88,6 +88,7 @@ mysqli_query($koneksi,$sql_dp);
                         <th width="20%">Foto Produk</th>
                         <th width="20%">Brand</th>
                         <th width="20%">Kategori</th>
+                        <th width="20%">Sub Kategori</th>
                         <th width="20%">Deskripsi</th>
                         <th width="20%">Jenis Kulit</th>
                         <th width="15%"><center>Aksi</center></th>
@@ -105,13 +106,14 @@ mysqli_query($koneksi,$sql_dp);
                     }
                     
                     $sql_u = "SELECT p.id_produk,p.nama_produk,p.foto_produk,p.brand_produk, p.kategori_produk,
-                    p.deskripsi_produk, p.jenis_kulit FROM produk p";
+                    p.sub_kategori, p.deskripsi_produk, p.jenis_kulit FROM produk p";
 
                     if (isset($_GET["katakunci"])) {
                       $katakunci_produk = $_GET["katakunci"];
                       $sql_u .= " WHERE `nama_produk` LIKE '%$katakunci_produk%'
                       OR `brand_produk` LIKE '%$katakunci_produk%' 
                       OR `kategori_produk` LIKE '%$katakunci_produk%' 
+                      OR `sub_kategori` LIKE '%$katakunci_produk%' 
                       OR `jenis_kulit` LIKE '%$katakunci_produk%'";
                     }
                     $sql_u .= " ORDER BY `id_produk` LIMIT $posisi, $batas";
@@ -124,14 +126,16 @@ mysqli_query($koneksi,$sql_dp);
                       $foto_produk = $data_u[2];
                       $brand_produk = $data_u[3];
                       $kategori_produk = $data_u[4];
-                      $deskripsi_produk = $data_u[5];
-                      $jenis_kulit = $data_u[6];
+                      $sub_kategori = $data_u[5];
+                      $deskripsi_produk = $data_u[6];
+                      $jenis_kulit = $data_u[7];
                       echo "<tr>
                       <td>$no</td>
                       <td>$nama_produk</td>
                       <td><img src='foto_produk/$foto_produk' width='60' class='img-thumbnail'></td>
                        <td>$brand_produk</td>
                         <td>$kategori_produk</td>
+                        <td>$sub_kategori</td>
                         <td>$deskripsi_produk</td>
                         <td>$jenis_kulit</td>
                       <td align='center'>
@@ -149,13 +153,14 @@ mysqli_query($koneksi,$sql_dp);
               <div class="card-footer clearfix">
                 <?php
                 $sql_jum = "SELECT p.id_produk,p.nama_produk,p.foto_produk,p.brand_produk, p.kategori_produk,
-                    p.deskripsi_produk, p.jenis_kulit FROM produk p";
+                    p.sub_kategori, p.deskripsi_produk, p.jenis_kulit FROM produk p";
 
                 if (isset($_GET["katakunci"])) {
                   $katakunci_produk = $_GET["katakunci"];
                   $sql_jum .= " WHERE `nama_produk` LIKE '%$katakunci_produk%'
                       OR `brand_produk` LIKE '%$katakunci_produk%' 
                       OR `kategori_produk` LIKE '%$katakunci_produk%' 
+                      OR `sub_kategori` LIKE '%$katakunci_produk%' 
                       OR `jenis_kulit` LIKE '%$katakunci_produk%'";
                 }
                 $query_jum = mysqli_query($koneksi, $sql_jum);

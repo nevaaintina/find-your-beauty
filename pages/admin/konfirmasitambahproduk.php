@@ -10,6 +10,7 @@ include('../../includes/db.php');
 $nama_produk = $_POST['nama_produk'];
 $brand_produk = $_POST['brand_produk'];
 $kategori_produk = $_POST['kategori_produk'];
+$sub_kategori = $_POST['sub_kategori'];
 $deskripsi_produk = $_POST['deskripsi_produk'];
 $jenis_kulit = $_POST['jenis_kulit'];
 
@@ -22,6 +23,9 @@ if (empty($nama_produk)) {
   exit;
 } else if (empty($kategori_produk)) {
   header("Location:tambahproduk.php?notif=tambahkosong&jenis=kategori_produk");
+  exit;
+} else if (empty($sub_kategori)) {
+  header("Location:tambahproduk.php?notif=tambahkosong&jenis=sub_kategori");
   exit;
 } else if (empty($deskripsi_produk)) {
   header("Location:tambahproduk.php?notif=tambahkosong&jenis=deskripsi_produk");
@@ -41,8 +45,8 @@ if (!empty($lokasi_file)) {
 }
 
 // Simpan ke database
-$sql = "INSERT INTO `produk` (`nama_produk`, `brand_produk`, `kategori_produk`, `deskripsi_produk`, `jenis_kulit`, `foto_produk`) 
-        VALUES ('$nama_produk', '$brand_produk', '$kategori_produk', '$deskripsi_produk', '$jenis_kulit', '$nama_file')";
+$sql = "INSERT INTO `produk` (`nama_produk`, `brand_produk`, `kategori_produk`, `sub_kategori`, `deskripsi_produk`, `jenis_kulit`, `foto_produk`) 
+        VALUES ('$nama_produk', '$brand_produk', '$kategori_produk', '$sub_kategori', '$deskripsi_produk', '$jenis_kulit', '$nama_file')";
 
 mysqli_query($koneksi, $sql);
 

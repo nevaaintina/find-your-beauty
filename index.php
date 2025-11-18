@@ -1,113 +1,136 @@
-<!-- Main banner -->
-<?php include_once('components/header.php');
+<?php 
+include_once('components/header.php');
+include_once('components/navbar.php');
 require_once __DIR__ . '/function/function.php';
 
-$article = query("SELECT * FROM artikel ORDER BY tanggal_terbit")[0];
+// Ambil artikel terbaru
+$article = query("SELECT * FROM artikel ORDER BY tanggal_terbit DESC LIMIT 1");
+$article = $article ? $article[0] : null;
 
-$konten = strip_tags($article["konten"]);
-$kata = explode(' ', $konten);
-$preview = implode(' ', array_slice($kata, 0, 30));
+// Siapkan konten preview jika ada artikel
+$preview = '';
+if ($article) {
+    $konten = strip_tags($article["konten"]);
+    $kata = explode(' ', $konten);
+    $preview = implode(' ', array_slice($kata, 0, 30));
+}
 
-
-
+// Ambil 4 produk unggulan berdasarkan rating tertinggi
+$produkUnggulan = query("
+    SELECT p.id_produk, p.nama_produk, p.foto_produk, p.brand_produk,
+    IFNULL(AVG(r.rating), 0) AS rata_rating, COUNT(r.id_review) AS jumlah_review
+    FROM produk p LEFT JOIN review r ON p.id_produk = r.id_produk
+    GROUP BY p.id_produk ORDER BY rata_rating DESC LIMIT 4");
 ?>
 
-  <section class="max-w-7xl mx-auto bg-[#d6cfc3] rounded-md mt-6 px-6 py-6 flex flex-col md:flex-row items-center md:items-start gap-6">
-   <div class="flex-1 text-[#3a3a3a]">
-    <h2 class="text-xl font-semibold mb-4 leading-snug">
-     Temukan Produk Skincare Untuk Kulit Sehat Berseri
-    </h2>
-    <a href="/find-your-beauty/pages/products/product.php" class="bg-[#6e6a5a] text-white text-sm font-semibold rounded-md px-6 py-2 hover:bg-[#5a5749] transition">
-     Lihat Produk
-    </a>
-   </div>
-   <div class="flex-1 flex justify-center md:justify-end">
-    <img alt="Close-up portrait of a woman with clear skin touching her face with her hand" class="rounded-md max-w-full h-auto" height="200" src="https://storage.googleapis.com/a1aa/image/0c034fab-55ed-4ad3-a9a0-010af7da10c0.jpg" width="300"/>
-   </div>
-  </section>
-  <!-- Your Skincare Adventure Starts Here -->
-  <section class="max-w-7xl mx-auto mt-10 px-4">
-   <h3 class="text-[#3a3a3a] font-playfair font-semibold text-lg mb-6 text-center">
-    Your Skincare Adventure Starts Here
-   </h3>
-   <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-xl mx-auto text-center text-xs text-[#3a3a3a]">
-    <div class="flex flex-col items-center space-y-2">
-     <img alt="Image representing dry skin condition with a woman touching her cheek" class="rounded-md" height="80" src="https://storage.googleapis.com/a1aa/image/00eabf49-c6eb-4410-ab40-523199ebc69f.jpg" width="80"/>
-     <span>
-      Kulit Kering
-     </span>
-    </div>
-    <div class="flex flex-col items-center space-y-2">
-     <img alt="Image representing oily skin condition with a woman touching her forehead" class="rounded-md" height="80" src="https://storage.googleapis.com/a1aa/image/0b16d1a4-05b8-4554-ec92-4d383ebb84af.jpg" width="80"/>
-     <span>
-      Kulit Berminyak
-     </span>
-    </div>
-    <div class="flex flex-col items-center space-y-2">
-     <img alt="Image representing sensitive skin condition with a woman touching her cheek gently" class="rounded-md" height="80" src="https://storage.googleapis.com/a1aa/image/2b2add8f-f438-4e46-25d3-57a37990bfb1.jpg" width="80"/>
-     <span>
-      Kulit Sensitive
-     </span>
-    </div>
-    <div class="flex flex-col items-center space-y-2">
-     <img alt="Image representing combination skin condition with a woman touching her chin" class="rounded-md" height="80" src="https://storage.googleapis.com/a1aa/image/dc1b1ee7-d5de-4780-dfa6-6136c6e8bb52.jpg" width="80"/>
-     <span>
-      Kulit Kombinasi
-     </span>
-    </div>
-   </div>
-  </section>
-  <!-- Kategori Unggulan -->
-  <section class="max-w-7xl mx-auto mt-10 px-4">
-   <h3 class="text-[#3a3a3a] font-playfair font-semibold text-lg mb-6 text-center">
-    Kategori Unggulan
-   </h3>
-   <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-5xl mx-auto text-center text-xs text-[#3a3a3a]">
-    <div>
-     <img alt="Image showing skincare category 1 with bottles and jars on a shelf" class="rounded-md w-full h-auto" height="120" src="https://storage.googleapis.com/a1aa/image/c61a43e9-4668-4b19-d913-59aea5799d30.jpg" width="200"/>
-    </div>
-    <div>
-     <img alt="Image showing skincare category 2 with pink themed skincare products" class="rounded-md w-full h-auto" height="120" src="https://storage.googleapis.com/a1aa/image/d97215af-2727-42bb-7556-52678e8b153b.jpg" width="200"/>
-    </div>
-    <div>
-     <img alt="Image showing skincare category 3 with blue and white bottles on a table" class="rounded-md w-full h-auto" height="120" src="https://storage.googleapis.com/a1aa/image/6ed62743-e44e-4e0b-9545-168921f4906c.jpg" width="200"/>
-    </div>
-    <div>
-     <img alt="Image showing skincare category 4 with blue packaging products" class="rounded-md w-full h-auto" height="120" src="https://storage.googleapis.com/a1aa/image/9bd521b8-454e-4d04-b69e-a05c194f0aa8.jpg" width="200"/>
-    </div>
-   </div>
-  </section>
-  <!-- This Week's Choice -->
-  <section class="max-w-7xl mx-auto mt-10 px-4 bg-[#d6cfc3] rounded-md py-8 flex justify-center gap-6">
-   <div class="w-24 sm:w-28 md:w-32">
-    <img alt="Sheet mask skincare product in white packaging" class="rounded-md w-full h-auto" height="140" src="https://storage.googleapis.com/a1aa/image/fd050fd0-4c71-46e4-70f3-1324d483dadd.jpg" width="100"/>
-   </div>
-   <div class="w-24 sm:w-28 md:w-32">
-    <img alt="Serum skincare product in dark brown bottle with dropper" class="rounded-md w-full h-auto" height="140" src="https://storage.googleapis.com/a1aa/image/6d2e373c-1ef6-418a-c58e-2fab12dc696f.jpg" width="100"/>
-   </div>
-   <div class="w-24 sm:w-28 md:w-32">
-    <img alt="Face cream skincare product in white and pink tube" class="rounded-md w-full h-auto" height="140" src="https://storage.googleapis.com/a1aa/image/3cdaa792-dc63-4b16-a063-f4fe8f76a5dd.jpg" width="100"/>
-   </div>
-   <div class="w-24 sm:w-28 md:w-32">
-    <img alt="Face wash skincare product in blue tube" class="rounded-md w-full h-auto" height="140" src="https://storage.googleapis.com/a1aa/image/a3723bea-3eef-4fe3-6e0b-655b994d4d50.jpg" width="100"/>
-   </div>
-  </section>
-  <!-- Article Section -->
-  <section class="max-w-7xl mx-auto mt-10 px-6 py-6 flex flex-col md:flex-row items-center bg-[#f5f0e9] gap-6">
-   <div class="flex-1 text-[#3a3a3a] text-sm leading-relaxed">
-    <h4 class="font-playfair font-semibold text-base mb-3">
-    <?= $article["judul_artikel"] ?>
-    </h4>
-    <p>
-    <?= $preview?> ....
-    </p>
-    <a href="/find-your-beauty/pages/articles/detail-article.php?id=<?=$article["id_artikel"] ?>" aria-label="Learn more about 9 Skincare Terbaik Untuk Menjaga Kesehatan Kulit" class="mt-4 text-[#6e6a5a] font-semibold text-xs hover:underline">
-     Learn More
-    </a>
-   </div>
-   <div class="flex-1 flex justify-center md:justify-end">
-    <img alt="Portrait of a woman with clear skin posing with hand near her face" class="rounded-md max-w-full h-auto" height="180" src="pages/admin/file_artikel/<?= $article['foto_artikel'] ?>" width="280"/>
-   </div>
-  </section>
+<!-- Banner -->
+<section class="max-w-7xl mx-auto mt-6 px-6 py-6">
+  <div class="relative h-72 md:h-96 rounded-md overflow-hidden group">
+    <!-- 2 Layer untuk transisi gambar -->
+    <div class="absolute inset-0 w-full h-full bg-cover bg-center rounded-md transition-opacity duration-1000 opacity-100" id="banner1"></div>
+    <div class="absolute inset-0 w-full h-full bg-cover bg-center rounded-md transition-opacity duration-1000 opacity-0" id="banner2"></div>
 
-  <?php include_once('components/footer.php'); ?>
+    <!-- Overlay konten -->
+    <div class="absolute inset-0 bg-black/30 flex flex-col justify-center px-10 text-white z-10">
+      <h2 class="text-xl md:text-2xl font-semibold mb-4 leading-snug">Temukan Produk Skincare Untuk Kulit Sehat Berseri</h2>
+      <a href="pages/products/product.php"
+   class="bg-white text-[#3a3a3a] text-sm font-semibold rounded-md px-6 py-2 w-fit hover:bg-[#f1f1f1] hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg">
+   Lihat Produk
+</a>
+
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Jenis Kulit -->
+<section class="max-w-7xl mx-auto mt-10 px-4">
+  <h3 class="text-[#3a3a3a] font-playfair font-semibold text-lg mb-6 text-center">Jenis Kulit</h3>
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-xl mx-auto text-center text-xs text-[#3a3a3a]">
+    <?php
+    $kategori_kulit = [
+      ['Kulit Kering', '00eabf49-c6eb-4410-ab40-523199ebc69f.jpg'],
+      ['Kulit Berminyak', '0b16d1a4-05b8-4554-ec92-4d383ebb84af.jpg'],
+      ['Kulit Sensitive', '2b2add8f-f438-4e46-25d3-57a37990bfb1.jpg'],
+      ['Kulit Kombinasi', 'dc1b1ee7-d5de-4780-dfa6-6136c6e8bb52.jpg'],
+    ];
+    foreach ($kategori_kulit as $k) {
+      echo "
+      <div class='flex flex-col items-center space-y-2 transform hover:scale-105 hover:shadow-md transition-all duration-300 cursor-pointer p-3 rounded-md bg-white'>
+        <img src='https://storage.googleapis.com/a1aa/image/{$k[1]}' alt='{$k[0]}'
+             class='rounded-md shadow-md w-20 h-20 object-cover'>
+        <span class='mt-2'>{$k[0]}</span>
+      </div>";
+    }
+    ?>
+  </div>
+</section>
+
+
+<!-- Produk Unggulan -->
+<section class="max-w-7xl mx-auto mt-10 px-4">
+  <h3 class="text-[#3a3a3a] font-playfair font-semibold text-lg mb-6 text-center">Produk Unggulan</h3>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-sm text-[#3a3a3a]">
+    <?php foreach ($produkUnggulan as $item): ?>
+      <a href="pages/products/detail/detail-product.php?id_produk=<?= $item['id_produk'] ?>"
+   class="bg-white shadow-md rounded-md overflow-hidden transform hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+
+        <img src="pages/admin/foto_produk/<?= htmlspecialchars($item['foto_produk']) ?>" alt="<?= htmlspecialchars($item['nama_produk']) ?>" class="w-full h-48 object-contain p-4 bg-white mx-auto">
+        <div class="p-4">
+          <h5 class="font-semibold text-base mb-1"><?= htmlspecialchars($item['nama_produk']) ?></h5>
+          <p class="text-xs mb-1"><strong>Brand:</strong> <?= htmlspecialchars($item['brand_produk']) ?></p>
+          <p class="text-xs text-[#e91e63]">❤️<?= number_format($item['rata_rating'], 1) ?> (<?= $item['jumlah_review'] ?> review)</p>
+        </div>
+      </a>
+    <?php endforeach; ?>
+  </div>
+</section>
+
+<!-- Artikel Terbaru -->
+<?php if ($article): ?>
+<section class="max-w-7xl mx-auto mt-10 px-6 py-6 flex flex-col md:flex-row items-center bg-[#f5f0e9] gap-6 transition-all duration-500 hover:shadow-md">
+  <div class="flex-1 text-[#3a3a3a] text-sm leading-relaxed transition duration-300 hover:scale-[1.01]">
+    <h4 class="font-playfair font-semibold text-base mb-3"><?= htmlspecialchars($article["judul_artikel"]) ?></h4>
+    <p><?= $preview ?> ....</p>
+    <a href="pages/articles/detail-article.php?id=<?= $article["id_artikel"] ?>" class="mt-4 inline-block text-[#6e6a5a] font-semibold text-xs hover:underline hover:text-[#3a3a3a] transition-all">Learn More</a>
+  </div>
+  <div class="flex-1 flex justify-center md:justify-end">
+    <img src="pages/admin/file_artikel/<?= $article['foto_artikel'] ?>" alt="Foto artikel"
+         class="rounded-md object-cover w-full h-60 transition-transform duration-500 hover:scale-105">
+  </div>
+</section>
+
+<?php endif; ?>
+
+<?php include_once('components/footer.php'); ?>
+
+<!-- Banner Slider Script -->
+<script>
+  const images = [
+    'assets/slide1.jpg',
+    'assets/slide2.jpg',
+    'assets/slide3.jpg'
+  ];
+
+  let current = 0;
+  const banner1 = document.getElementById('banner1');
+  const banner2 = document.getElementById('banner2');
+  banner1.style.backgroundImage = `url('${images[0]}')`;
+
+  setInterval(() => {
+    const next = (current + 1) % images.length;
+    // Set gambar berikutnya di layer belakang
+    banner2.style.backgroundImage = `url('${images[next]}')`;
+    banner2.style.opacity = 1;
+
+    setTimeout(() => {
+      // Setelah transisi selesai, tukar posisi dan reset
+      banner1.style.backgroundImage = banner2.style.backgroundImage;
+      banner2.style.opacity = 0;
+      current = next;
+    }, 1000); // Waktu sama dengan duration CSS (1000ms)
+  }, 4000); // Ganti tiap 4 detik
+</script>
+
+
