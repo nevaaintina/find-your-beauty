@@ -9,6 +9,7 @@ if (isset($_SESSION['id_produk'])) {
   $nama_produk = $_POST['nama_produk'];
   $brand_produk = $_POST['brand_produk'];
   $kategori_produk = $_POST['kategori_produk'];
+  $sub_kategori = $_POST['sub_kategori'];
   $deskripsi_produk = $_POST['deskripsi_produk'];
   $jenis_kulit = $_POST['jenis_kulit'];
 
@@ -27,6 +28,9 @@ if (isset($_SESSION['id_produk'])) {
     exit;
   } else if (empty($kategori_produk)) {
     header("Location:editproduk.php?notif=editkosong&jenis=kategori_produk");
+    exit;
+  } else if (empty($sub_kategori)) {
+    header("Location:editproduk.php?notif=editkosong&jenis=sub_kategori");
     exit;
   } else if (empty($deskripsi_produk)) {
     header("Location:editproduk.php?notif=editkosong&jenis=deskripsi_produk");
@@ -52,6 +56,7 @@ if (isset($_SESSION['id_produk'])) {
               SET `nama_produk`='$nama_produk', 
                   `brand_produk`='$brand_produk',
                   `kategori_produk`='$kategori_produk',
+                  `sub_kategori`='$sub_kategori',
                   `deskripsi_produk`='$deskripsi_produk',
                   `jenis_kulit`='$jenis_kulit',
                   `foto_produk`='$nama_file' 
@@ -63,6 +68,7 @@ if (isset($_SESSION['id_produk'])) {
             SET `nama_produk`='$nama_produk', 
                 `brand_produk`='$brand_produk',
                 `kategori_produk`='$kategori_produk',
+                `sub_kategori`='$sub_kategori',
                 `deskripsi_produk`='$deskripsi_produk',
                 `jenis_kulit`='$jenis_kulit' 
             WHERE `id_produk`='$id_produk'";

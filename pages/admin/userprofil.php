@@ -30,7 +30,7 @@ mysqli_query($koneksi,$sql_dp);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3><i class="fa fa-graduation-cap"></i>User</h3>
+            <h3></i>User</h3>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

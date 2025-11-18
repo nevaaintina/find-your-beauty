@@ -7,7 +7,7 @@ if(isset($_GET['data'])){
   $_SESSION['id_produk']=$id_produk;
 
   //get data riwayat pendidikan
-  $sql_m = "SELECT nama_produk, foto_produk,brand_produk,kategori_produk, 
+  $sql_m = "SELECT nama_produk, foto_produk, brand_produk, kategori_produk, sub_kategori, 
   deskripsi_produk, jenis_kulit FROM produk WHERE id_produk='$id_produk'";
   $query_m = mysqli_query($koneksi, $sql_m);
   while($data_m = mysqli_fetch_row($query_m)){
@@ -15,8 +15,9 @@ if(isset($_GET['data'])){
     $foto_produk= $data_m[1];
     $brand_produk = $data_m[2];
     $kategori_produk = $data_m[3];
-    $deskripsi_produk = $data_m [4];
-    $jenis_kulit = $data_m [5];
+    $sub_kategori = $data_m[4];
+    $deskripsi_produk = $data_m [5];
+    $jenis_kulit = $data_m [6];
   }
 }
 ?>
@@ -53,7 +54,6 @@ if(isset($_GET['data'])){
 
     <!-- Main content -->
     <section class="content">
-
     <div class="card card-info">
       <div class="card-header">
         <h3 class="card-title"style="margin-top:5px;"><i class="far fa-list-alt"></i> Form Edit Data Produk</h3>
@@ -82,7 +82,7 @@ if(isset($_GET['data'])){
             </div>
           </div>
           <div class="form-group row">
-            <label for="fpto_produk" class="col-sm-3 col-form-label">Foto Produk</label>
+            <label for="foto_produk" class="col-sm-3 col-form-label">Foto Produk</label>
             <div class="col-sm-7">
               <div class="custom-file">
                 <input type="file" class="custom-file-input" name="foto_produk" id="customFile">
@@ -100,6 +100,12 @@ if(isset($_GET['data'])){
             <label for="kategori_produk" class="col-sm-3 col-form-label">Kategori Produk</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" name="kategori_produk" id="kategori_produk" value="<?php echo $kategori_produk; ?>">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="sub_kategori" class="col-sm-3 col-form-label">Sub Kategori</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" name="sub_kategori" id="sub_kategori" value="<?php echo $sub_kategori; ?>">
             </div>
           </div>
           <div class="form-group row">

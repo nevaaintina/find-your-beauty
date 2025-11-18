@@ -30,7 +30,7 @@ mysqli_query($koneksi,$sql_dp);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3><i class="fa fa-suitcase"></i> Artikel</h3>
+            <h3> Artikel</h3>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -85,6 +85,7 @@ mysqli_query($koneksi,$sql_dp);
                         <th width="20%">Kategori Artikel</th>
                         <th width="20%">Penulis</th>
                         <th width="20%">Tanggal Terbit</th>
+                        <th width="20%">Foto Artikel</th>
                         <th width="15%"><center>Aksi</center></th>
                       </tr>
                     </thead>
@@ -100,7 +101,7 @@ mysqli_query($koneksi,$sql_dp);
                     }
                     
                     $sql_u = "SELECT a.id_artikel,a.judul_artikel,a.konten, a.kategori_artikel, 
-                    a.penulis, a.tanggal_terbit FROM artikel a";
+                    a.penulis, a.tanggal_terbit, a.foto_artikel FROM artikel a";
 
                     if (isset($_GET["katakunci"])) {
                       $katakunci_artikel = $_GET["katakunci"];
@@ -120,6 +121,7 @@ mysqli_query($koneksi,$sql_dp);
                       $kategori_artikel = $data_u[3];
                       $penulis = $data_u[4];
                       $tanggal_terbit = $data_u[5];
+                      $foto_artikel = $data_u[6];
                       echo "<tr>
                       <td>$no</td>
                       <td>$judul_artikel</td>
@@ -127,6 +129,7 @@ mysqli_query($koneksi,$sql_dp);
                         <td>$kategori_artikel</td>
                         <td>$penulis</td>
                         <td>$tanggal_terbit</td>
+                        <td><img src='file_artikel/$foto_artikel' width='60' class='img-thumbnail'></td>
                       <td align='center'>
                       <a href='editartikel.php?data=$id_artikel' class='btn btn-xs btn-info'><i class='fas fa-edit'></i> Edit</a>
                       <a href=\"javascript:if(confirm('Anda yakin ingin menghapus data $id_artikel?')) window.location.href='artikel.php?aksi=hapus&data=$id_artikel&notif=hapusberhasil'\" class='btn btn-xs btn-warning'><i class='fas fa-trash'></i> Hapus</a>
@@ -142,7 +145,7 @@ mysqli_query($koneksi,$sql_dp);
               <div class="card-footer clearfix">
                 <?php
                 $sql_jum = "SELECT a.id_artikel,a.judul_artikel,a.konten, a.kategori_artikel, 
-                    a.penulis, a.tanggal_terbit FROM artikel a";
+                    a.penulis, a.tanggal_terbit, a.foto_artikel FROM artikel a";
                 if (isset($_GET["katakunci"])) {
                   $katakunci_artikel = $_GET["katakunci"];
                   $sql_jum .= " WHERE `tanggal_terbit` LIKE '%$katakunci_artikel%'

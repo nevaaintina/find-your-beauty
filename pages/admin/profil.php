@@ -35,7 +35,7 @@ while($data = mysqli_fetch_row($query)){
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3><i class="fas fa-user-tie"></i> Profil</h3>
+            <h3>Profil</h3>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

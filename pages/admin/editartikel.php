@@ -6,7 +6,7 @@ if(isset($_GET['data'])){
   $id_artikel = $_GET['data'];
   $_SESSION['id_artikel']=$id_artikel;
 
-  //get data riwayat pekerjaan
+  //get data
   $sql_m = "SELECT judul_artikel, konten, kategori_artikel, penulis, tanggal_terbit FROM artikel WHERE id_artikel='$id_artikel'";
   $query_m = mysqli_query($koneksi, $sql_m);
   while($data_m = mysqli_fetch_row($query_m)){
@@ -70,12 +70,21 @@ if(isset($_GET['data'])){
         <?php }?>
         <?php }?>
       </div>
-      <form class="form-horizontal" action="konfirmasitambahartikel.php" method="POST" enctype="multipart/form-data">
+      <form class="form-horizontal" action="konfirmasieditartikel.php" method="POST" enctype="multipart/form-data">
         <div class="card-body">
           <div class="form-group row">
             <label for="judul_artikel" class="col-sm-3 col-form-label">Judul Artikel</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" name="judul_artikel" id="judul_artikel" value="<?php echo $judul_artikel; ?>">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="foto_artikel" class="col-sm-3 col-form-label">Foto Artikel</label>
+            <div class="col-sm-7">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" name="foto_artikel" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+              </div>  
             </div>
           </div>   
         <div class="form-group row">

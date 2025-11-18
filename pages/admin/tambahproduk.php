@@ -6,6 +6,7 @@ $nama_produk = "";
 $foto_produk = "";
 $brand_produk = "";
 $kategori_produk = "";
+$sub_kategori = "";
 $deskripsi_produk = "";
 $jenis_kulit = "";
 ?>
@@ -88,6 +89,12 @@ $jenis_kulit = "";
             <label for="kategori_produk" class="col-sm-3 col-form-label">Kategori</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" name="kategori_produk" id="kategori_produk" value="<?php echo $kategori_produk; ?>">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="sub_kategori" class="col-sm-3 col-form-label">Sub Kategori</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" name="sub_kategori" id="sub_kategori" value="<?php echo $sub_kategori; ?>">
             </div>
           </div>
           <div class="form-group row">
